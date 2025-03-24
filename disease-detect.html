@@ -1,0 +1,208 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Disease Detection</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">AgriTech</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="disease-detect.html" class="active">DISEASE DETECT</a></li>
+                    <li><a href="crop-preferences.html">CROP PREF.</a></li>
+                    <li><a href="weather.html">WEATHER</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Plant Disease Detection</h1>
+            <p>Upload an image of your plant to identify potential diseases</p>
+        </div>
+    </section>
+
+    <section class="disease-detect">
+        <div class="container">
+            <div class="upload-container">
+                <div class="upload-area" id="uploadArea">
+                    <i class="fas fa-cloud-upload-alt"></i>
+                    <h3>Drag & Drop or Click to Upload</h3>
+                    <p>Supported formats: JPG, PNG (Max size: 5MB)</p>
+                    <input type="file" id="fileUpload" accept="image/*" hidden>
+                    <button class="btn" id="uploadBtn">Select Image</button>
+                </div>
+                <div class="preview-area" id="previewArea" style="display: none;">
+                    <div class="preview-header">
+                        <h3>Image Preview</h3>
+                        <button class="btn-small" id="changeImageBtn">Change Image</button>
+                    </div>
+                    <div class="image-preview">
+                        <img id="previewImage" src="#" alt="Preview">
+                    </div>
+                    <button class="btn" id="analyzeBtn">Analyze Image</button>
+                </div>
+            </div>
+            
+            <div class="results-container" id="resultsContainer" style="display: none;">
+                <h2>Analysis Results</h2>
+                <div class="result-card">
+                    <div class="result-header">
+                        <h3 id="diseaseName">Tomato Late Blight</h3>
+                        <span class="confidence" id="confidenceScore">Confidence: 95%</span>
+                    </div>
+                    <div class="result-details">
+                        <div class="result-description">
+                            <h4>Description</h4>
+                            <p id="diseaseDescription">Late blight is a destructive disease of tomato and potato that can kill plants within days if weather conditions are favorable and the disease is not controlled.</p>
+                        </div>
+                        <div class="result-treatment">
+                            <h4>Recommended Treatment</h4>
+                            <ul id="treatmentList">
+                                <li>Remove and destroy infected plant parts</li>
+                                <li>Apply copper-based fungicides</li>
+                                <li>Improve air circulation around plants</li>
+                                <li>Avoid overhead watering</li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="similar-diseases">
+                    <h3>Similar Diseases</h3>
+                    <div class="disease-cards">
+                        <div class="disease-card">
+                            <img src="images/disease1.jpg" alt="Disease image">
+                            <h4>Early Blight</h4>
+                            <p>Confidence: 15%</p>
+                        </div>
+                        <div class="disease-card">
+                            <img src="images/disease2.jpg" alt="Disease image">
+                            <h4>Septoria Leaf Spot</h4>
+                            <p>Confidence: 8%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="how-it-works">
+                <h2>How It Works</h2>
+                <div class="steps">
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-camera"></i>
+                        </div>
+                        <h3>Step 1: Upload</h3>
+                        <p>Take a clear photo of the affected plant part and upload it to our system</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <h3>Step 2: Analysis</h3>
+                        <p>Our AI analyzes the image using a database of known plant diseases</p>
+                    </div>
+                    <div class="step">
+                        <div class="step-icon">
+                            <i class="fas fa-clipboard-list"></i>
+                        </div>
+                        <h3>Step 3: Results</h3>
+                        <p>Receive detailed information about the disease and treatment options</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="faq">
+        <div class="container">
+            <h2>Frequently Asked Questions</h2>
+            <div class="accordion">
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What types of plants can be analyzed?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Our system can currently identify diseases in over 30 common crops including tomatoes, potatoes, corn, wheat, rice, and various fruits.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>How accurate is the disease detection?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>Our AI model has an average accuracy of 90% for the most common plant diseases. The accuracy depends on image quality and disease visibility.</p>
+                    </div>
+                </div>
+                <div class="accordion-item">
+                    <div class="accordion-header">
+                        <h3>What makes a good plant disease image?</h3>
+                        <i class="fas fa-chevron-down"></i>
+                    </div>
+                    <div class="accordion-content">
+                        <p>For best results, take close-up photos in natural light, focusing on the affected areas. Include both healthy and diseased parts for comparison.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">AgriTech</a>
+                    <p>Modern Solutions for Modern Farming</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disease-detect.html">Disease Detection</a></li>
+                        <li><a href="crop-preferences.html">Crop Preferences</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agriville, AG 12345</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@agritech.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AgriTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/disease-detect.js"></script>
+</body>
+</html>

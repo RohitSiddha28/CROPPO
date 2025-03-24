@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Weather Forecast</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">AgriTech</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="disease-detect.html">DISEASE DETECT</a></li>
+                    <li><a href="crop-preferences.html">CROP PREF.</a></li>
+                    <li><a href="weather.html" class="active">WEATHER</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Weather Forecast</h1>
+            <p>Get accurate weather predictions for agricultural planning</p>
+        </div>
+    </section>
+
+    <section class="weather-search">
+        <div class="container">
+            <div class="search-box">
+                <h2>Check Weather Forecast</h2>
+                <form id="weatherSearchForm">
+                    <div class="form-group">
+                        <label for="location">Location</label>
+                        <div class="location-input">
+                            <input type="text" id="location" placeholder="Enter city or zip code" required>
+                            <button type="button" id="getCurrentLocation" title="Use current location">
+                                <i class="fas fa-map-marker-alt"></i>
+                            </button>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="forecastDays">Forecast Period</label>
+                        <select id="forecastDays">
+                            <option value="1">Today</option>
+                            <option value="3">3 Days</option>
+                            <option value="7" selected>7 Days</option>
+                            <option value="14">14 Days</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Get Forecast</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section class="weather-display" id="weatherDisplay" style="display: none;">
+        <div class="container">
+            <div class="current-weather">
+                <div class="weather-location">
+                    <h2 id="weatherLocation">Chicago, IL</h2>
+                    <p id="currentDate">Monday, June 5, 2023</p>
+                </div>
+                <div class="weather-info">
+                    <div class="weather-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="weather-temp">
+                        <h2 id="currentTemp">28°C</h2>
+                        <p id="weatherDescription">Sunny</p>
+                    </div>
+                    <div class="weather-details">
+                        <div class="detail">
+                            <i class="fas fa-wind"></i>
+                            <span>Wind</span>
+                            <p id="windSpeed">15 km/h</p>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-tint"></i>
+                            <span>Humidity</span>
+                            <p id="humidity">45%</p>
+                        </div>
+                        <div class="detail">
+                            <i class="fas fa-cloud-rain"></i>
+                            <span>Precipitation</span>
+                            <p id="precipitation">0%</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="forecast">
+                <h2>7-Day Forecast</h2>
+                <div class="forecast-container" id="forecastContainer">
+                    <!-- Forecast cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="agricultural-impact">
+                <h2>Agricultural Impact</h2>
+                <div class="impact-cards">
+                    <div class="impact-card">
+                        <h3>Irrigation Needs</h3>
+                        <div class="impact-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 70%"></div>
+                            </div>
+                            <span class="meter-value">High</span>
+                        </div>
+                        <p>Based on the forecast, irrigation is recommended in the next 3-5 days.</p>
+                    </div>
+                    <div class="impact-card">
+                        <h3>Disease Risk</h3>
+                        <div class="impact-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 30%"></div>
+                            </div>
+                            <span class="meter-value">Low</span>
+                        </div>
+                        <p>Current conditions indicate low risk for common crop diseases.</p>
+                    </div>
+                    <div class="impact-card">
+                        <h3>Harvest Conditions</h3>
+                        <div class="impact-meter">
+                            <div class="meter-bar">
+                                <div class="meter-fill" style="width: 90%"></div>
+                            </div>
+                            <span class="meter-value">Excellent</span>
+                        </div>
+                        <p>Weather conditions are favorable for harvesting in the next 5-7 days.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="weather-alerts">
+        <div class="container">
+            <h2>Weather Alerts</h2>
+            <div class="alert-box" id="alertBox">
+                <div class="alert">
+                    <div class="alert-icon">
+                        <i class="fas fa-exclamation-triangle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <h3>Heat Advisory</h3>
+                        <p>High temperatures expected for the next 3 days. Ensure adequate irrigation for sensitive crops.</p>
+                        <span class="alert-time">Issued: June 5, 2023 - 8:00 AM</span>
+                    </div>
+                </div>
+                <div class="alert">
+                    <div class="alert-icon">
+                        <i class="fas fa-info-circle"></i>
+                    </div>
+                    <div class="alert-content">
+                        <h3>Frost Warning</h3>
+                        <p>Overnight temperatures may drop below freezing on Friday. Protect sensitive crops.</p>
+                        <span class="alert-time">Issued: June 5, 2023 - 9:15 AM</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="weather-tips">
+        <div class="container">
+            <h2>Weather-Based Farming Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-thermometer-three-quarters"></i>
+                    <h3>Heat Management</h3>
+                    <p>During heat waves, water crops early in the morning or late in the evening to minimize evaporation. Consider shade cloth for sensitive crops.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-cloud-rain"></i>
+                    <h3>Rain Preparation</h3>
+                    <p>Before heavy rain, ensure proper drainage in fields. Consider delaying fertilizer application to prevent runoff.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-snowflake"></i>
+                    <h3>Frost Protection</h3>
+                    <p>When frost is predicted, cover sensitive crops with row covers or use sprinkler irrigation to protect from freezing.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-wind"></i>
+                    <h3>Wind Management</h3>
+                    <p>In high wind conditions, delay spraying operations and ensure trellises and supports are secure for tall crops.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">AgriTech</a>
+                    <p>Modern Solutions for Modern Farming</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disease-detect.html">Disease Detection</a></li>
+                        <li><a href="crop-preferences.html">Crop Preferences</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agriville, AG 12345</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@agritech.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AgriTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/weather.js"></script>
+</body>
+</html>

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - Crop Preferences</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">AgriTech</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="disease-detect.html">DISEASE DETECT</a></li>
+                    <li><a href="crop-preferences.html" class="active">CROP PREF.</a></li>
+                    <li><a href="weather.html">WEATHER</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>Crop Preferences</h1>
+            <p>Find the best crops for your soil and climate conditions</p>
+        </div>
+    </section>
+
+    <section class="crop-preferences">
+        <div class="container">
+            <div class="soil-analyzer">
+                <h2>Soil & Climate Analysis</h2>
+                <form id="soilAnalysisForm">
+                    <div class="form-group">
+                        <label for="soilType">Soil Type</label>
+                        <select id="soilType" required>
+                            <option value="">Select Soil Type</option>
+                            <option value="clay">Clay</option>
+                            <option value="sandy">Sandy</option>
+                            <option value="loamy">Loamy</option>
+                            <option value="silty">Silty</option>
+                            <option value="peaty">Peaty</option>
+                            <option value="chalky">Chalky</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="soilPH">Soil pH Level</label>
+                        <select id="soilPH" required>
+                            <option value="">Select pH Level</option>
+                            <option value="acidic">Acidic (Below 6.0)</option>
+                            <option value="neutral">Neutral (6.0 - 7.0)</option>
+                            <option value="alkaline">Alkaline (Above 7.0)</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="rainfall">Average Annual Rainfall (mm)</label>
+                        <input type="number" id="rainfall" min="0" max="5000" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="temperature">Average Temperature (°C)</label>
+                        <input type="number" id="temperature" min="-20" max="50" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="region">Region/Climate Zone</label>
+                        <select id="region" required>
+                            <option value="">Select Region</option>
+                            <option value="tropical">Tropical</option>
+                            <option value="subtropical">Subtropical</option>
+                            <option value="temperate">Temperate</option>
+                            <option value="continental">Continental</option>
+                            <option value="polar">Polar</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn">Get Recommendations</button>
+                </form>
+            </div>
+
+            <div class="recommendations" id="cropRecommendations" style="display: none;">
+                <h2>Recommended Crops</h2>
+                <div class="crop-cards" id="cropCardsContainer">
+                    <!-- Crop cards will be inserted here by JavaScript -->
+                </div>
+            </div>
+
+            <div class="crop-calendar">
+                <h2>Seasonal Crop Calendar</h2>
+                <div class="season-tabs">
+                    <button class="season-tab active" data-season="spring">Spring</button>
+                    <button class="season-tab" data-season="summer">Summer</button>
+                    <button class="season-tab" data-season="fall">Fall</button>
+                    <button class="season-tab" data-season="winter">Winter</button>
+                </div>
+                <div class="season-content">
+                    <div class="season-panel active" id="spring">
+                        <div class="crop-grid">
+                            <div class="crop-item">
+                                <img src="images/crops/lettuce.jpg" alt="Lettuce">
+                                <h3>Lettuce</h3>
+                                <p>Planting: Early Spring</p>
+                                <p>Harvest: 45-60 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/peas.jpg" alt="Peas">
+                                <h3>Peas</h3>
+                                <p>Planting: Early Spring</p>
+                                <p>Harvest: 60-70 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/spinach.jpg" alt="Spinach">
+                                <h3>Spinach</h3>
+                                <p>Planting: Early Spring</p>
+                                <p>Harvest: 40-45 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/carrots.jpg" alt="Carrots">
+                                <h3>Carrots</h3>
+                                <p>Planting: Mid Spring</p>
+                                <p>Harvest: 70-80 days</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="season-panel" id="summer">
+                        <div class="crop-grid">
+                            <div class="crop-item">
+                                <img src="images/crops/tomatoes.jpg" alt="Tomatoes">
+                                <h3>Tomatoes</h3>
+                                <p>Planting: Late Spring</p>
+                                <p>Harvest: 70-85 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/corn.jpg" alt="Corn">
+                                <h3>Corn</h3>
+                                <p>Planting: Late Spring</p>
+                                <p>Harvest: 60-100 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/cucumber.jpg" alt="Cucumber">
+                                <h3>Cucumber</h3>
+                                <p>Planting: Late Spring</p>
+                                <p>Harvest: 50-70 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/peppers.jpg" alt="Peppers">
+                                <h3>Peppers</h3>
+                                <p>Planting: Late Spring</p>
+                                <p>Harvest: 60-90 days</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="season-panel" id="fall">
+                        <div class="crop-grid">
+                            <div class="crop-item">
+                                <img src="images/crops/broccoli.jpg" alt="Broccoli">
+                                <h3>Broccoli</h3>
+                                <p>Planting: Late Summer</p>
+                                <p>Harvest: 85-100 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/kale.jpg" alt="Kale">
+                                <h3>Kale</h3>
+                                <p>Planting: Late Summer</p>
+                                <p>Harvest: 50-65 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/cauliflower.jpg" alt="Cauliflower">
+                                <h3>Cauliflower</h3>
+                                <p>Planting: Late Summer</p>
+                                <p>Harvest: 85-100 days</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/radishes.jpg" alt="Radishes">
+                                <h3>Radishes</h3>
+                                <p>Planting: Early Fall</p>
+                                <p>Harvest: 25-30 days</p>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="season-panel" id="winter">
+                        <div class="crop-grid">
+                            <div class="crop-item">
+                                <img src="images/crops/garlic.jpg" alt="Garlic">
+                                <h3>Garlic</h3>
+                                <p>Planting: Late Fall</p>
+                                <p>Harvest: Next Summer</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/onions.jpg" alt="Onions">
+                                <h3>Onions</h3>
+                                <p>Planting: Late Fall/Winter</p>
+                                <p>Harvest: Next Summer</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/winter-wheat.jpg" alt="Winter Wheat">
+                                <h3>Winter Wheat</h3>
+                                <p>Planting: Fall</p>
+                                <p>Harvest: Early Summer</p>
+                            </div>
+                            <div class="crop-item">
+                                <img src="images/crops/cover-crops.jpg" alt="Cover Crops">
+                                <h3>Cover Crops</h3>
+                                <p>Planting: Fall</p>
+                                <p>Till under: Spring</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="crop-tips">
+        <div class="container">
+            <h2>Crop Management Tips</h2>
+            <div class="tips-grid">
+                <div class="tip-card">
+                    <i class="fas fa-tint"></i>
+                    <h3>Water Management</h3>
+                    <p>Proper irrigation is crucial for crop success. Different crops have different water requirements. Consider drip irrigation for water conservation.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-bug"></i>
+                    <h3>Pest Control</h3>
+                    <p>Implement integrated pest management (IPM) strategies to minimize chemical use while effectively controlling pests.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-leaf"></i>
+                    <h3>Soil Health</h3>
+                    <p>Maintain soil health through crop rotation, cover crops, and appropriate fertilization based on soil tests.</p>
+                </div>
+                <div class="tip-card">
+                    <i class="fas fa-seedling"></i>
+                    <h3>Crop Rotation</h3>
+                    <p>Rotate crops to prevent soil depletion, reduce pest pressure, and improve overall farm productivity.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">AgriTech</a>
+                    <p>Modern Solutions for Modern Farming</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disease-detect.html">Disease Detection</a></li>
+                        <li><a href="crop-preferences.html">Crop Preferences</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agriville, AG 12345</p>
+                    <p><i class="fas fa-phone"></i> (  123 Farm Road, Agriville, AG 12345</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@agritech.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AgriTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/crop-preferences.js"></script>
+</body>
+</html>
