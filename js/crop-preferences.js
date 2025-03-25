@@ -2,49 +2,32 @@ document.addEventListener('DOMContentLoaded', function() {
     const soilAnalysisForm = document.getElementById('soilAnalysisForm');
     const cropRecommendations = document.getElementById('cropRecommendations');
     const cropCardsContainer = document.getElementById('cropCardsContainer');
+    const sampleDataBtn = document.getElementById('sampleDataBtn');
 
-    // Sample crop data
-    const cropDatabase = {
-        clay: {
-            acidic: ['Cabbage', 'Broccoli', 'Brussels Sprouts'],
-            neutral: ['Beans', 'Peas', 'Corn'],
-            alkaline: ['Asparagus', 'Beets', 'Cauliflower']
-        },
-        sandy: {
-            acidic: ['Potatoes', 'Strawberries', 'Blueberries'],
-            neutral: ['Carrots', 'Radishes', 'Lettuce'],
-            alkaline: ['Spinach', 'Asparagus', 'Fava Beans']
-        },
-        loamy: {
-            acidic: ['Blueberries', 'Potatoes', 'Rhubarb'],
-            neutral: ['Tomatoes', 'Peppers', 'Cucumbers'],
-            alkaline: ['Cabbage', 'Cauliflower', 'Brussels Sprouts']
-        },
-        silty: {
-            acidic: ['Strawberries', 'Raspberries', 'Blackberries'],
-            neutral: ['Lettuce', 'Spinach', 'Chard'],
-            alkaline: ['Beets', 'Broccoli', 'Cauliflower']
-        },
-        peaty: {
-            acidic: ['Blueberries', 'Cranberries', 'Potatoes'],
-            neutral: ['Carrots', 'Onions', 'Lettuce'],
-            alkaline: ['Brassicas', 'Legumes', 'Spinach']
-        },
-        chalky: {
-            acidic: ['Not recommended'],
-            neutral: ['Spinach', 'Beets', 'Sweetcorn'],
-            alkaline: ['Cabbage', 'Cauliflower', 'Brussels Sprouts']
-        }
+    // Sample data for the form
+    const sampleData = {
+        temperature: 25,
+        humidity: 60,
+        rainfall: 1200,
+        nitrogen: 90,
+        phosphorous: 45,
+        potassium: 60,
+        ph: 6.5
     };
-
-    // Climate zone preferences
-    const climatePreferences = {
-        tropical: ['Rice', 'Bananas', 'Sugarcane', 'Coconut', 'Cassava'],
-        subtropical: ['Citrus', 'Avocado', 'Mango', 'Olives', 'Figs'],
-        temperate: ['Wheat', 'Barley', 'Apples', 'Pears', 'Grapes'],
-        continental: ['Wheat', 'Corn', 'Soybeans', 'Sunflowers', 'Potatoes'],
-        polar: ['Barley', 'Oats', 'Potatoes', 'Cabbage', 'Kale']
-    };
+    
+    // Handle sample data button
+    if (sampleDataBtn) {
+        sampleDataBtn.addEventListener('click', function() {
+            // Fill form with sample data
+            document.getElementById('temperature').value = sampleData.temperature;
+            document.getElementById('humidity').value = sampleData.humidity;
+            document.getElementById('rainfall').value = sampleData.rainfall;
+            document.getElementById('nitrogen').value = sampleData.nitrogen;
+            document.getElementById('phosphorous').value = sampleData.phosphorous;
+            document.getElementById('potassium').value = sampleData.potassium;
+            document.getElementById('ph').value = sampleData.ph;
+        });
+    }
 
     // Handle form submission
     if (soilAnalysisForm) {
@@ -52,112 +35,216 @@ document.addEventListener('DOMContentLoaded', function() {
             e.preventDefault();
             
             // Get form values
-            const soilType = document.getElementById('soilType').value;
-            const soilPH = document.getElementById('soilPH').value;
-            const rainfall = document.getElementById('rainfall').value;
             const temperature = document.getElementById('temperature').value;
-            const region = document.getElementById('region').value;
+            const humidity = document.getElementById('humidity').value;
+            const rainfall = document.getElementById('rainfall').value;
+            const nitrogen = document.getElementById('nitrogen').value;
+            const phosphorous = document.getElementById('phosphorous').value;
+            const potassium = document.getElementById('potassium').value;
+            const ph = document.getElementById('ph').value;
             
             // Generate recommendations
-            generateRecommendations(soilType, soilPH, rainfall, temperature, region);
+            generateRecommendations(temperature, humidity, rainfall, nitrogen, phosphorous, potassium, ph);
         });
     }
 
     // Generate crop recommendations based on input
-    function generateRecommendations(soilType, soilPH, rainfall, temperature, region) {
-        // Clear previous recommendations
-        if (cropCardsContainer) {
-            cropCardsContainer.innerHTML = '';
-        }
+    function generateRecommendations(temperature, humidity, rainfall, nitrogen, phosphorous, potassium, ph) {
+        // Show loading state
+        const submitBtn = soilAnalysisForm.querySelector('button[type="submit"]');
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
+        submitBtn.disabled = true;
         
-        // Get soil-based recommendations
-        let soilRecommendations = [];
-        if (cropDatabase[soilType] && cropDatabase[soilType][soilPH]) {
-            soilRecommendations = cropDatabase[soilType][soilPH];
-        }
-        
-        // Get climate-based recommendations
-        let climateRecommendations = [];
-        if (climatePreferences[region]) {
-            climateRecommendations = climatePreferences[region];
-        }
-        
-        // Combine recommendations (with some overlap)
-        let allRecommendations = [...new Set([...soilRecommendations, ...climateRecommendations])];
-        
-        // Filter based on rainfall and temperature (simplified logic)
-        let finalRecommendations = allRecommendations.filter(crop => {
-            // This is a simplified example - in a real app, you'd have more detailed crop requirements
-            return true;
-        });
-        
-        // If no recommendations, provide a fallback
-        if (finalRecommendations.length === 0 || finalRecommendations[0] === 'Not recommended') {
-            finalRecommendations = ['Cover Crops', 'Consider Soil Amendments', 'Consult Local Extension Office'];
-        }
-        
-        // Create crop cards
-        finalRecommendations.forEach(crop => {
-            const cropCard = createCropCard(crop, soilType, soilPH, rainfall, temperature, region);
-            if (cropCardsContainer) {
-                cropCardsContainer.appendChild(cropCard);
-            }
-        });
-        
-        // Show recommendations section
-        if (cropRecommendations) {
-            cropRecommendations.style.display = 'block';
+        // In a real app, you would make an API call to a backend service
+        // For this demo, we'll simulate a response with setTimeout
+        setTimeout(function() {
+            // Reset button state
+            submitBtn.innerHTML = 'Get Recommendations';
+            submitBtn.disabled = false;
             
-            // Scroll to recommendations
-            cropRecommendations.scrollIntoView({ behavior: 'smooth' });
-        }
+            // Clear previous recommendations
+            if (cropCardsContainer) {
+                cropCardsContainer.innerHTML = '';
+            }
+            
+            // Determine crop recommendations based on input (simplified logic)
+            let recommendedCrops = [];
+            
+            // Very simplified recommendation logic based on input parameters
+            // In a real app, this would be much more sophisticated
+            
+            // Rice prefers high rainfall, warm temperatures, and slightly acidic to neutral pH
+            if (rainfall > 1000 && temperature > 20 && temperature < 35 && ph >= 5.5 && ph <= 7.0) {
+                recommendedCrops.push({
+                    name: 'Rice',
+                    type: 'Cereal',
+                    suitability: 95,
+                    waterNeeds: 'High',
+                    growingSeason: 'Summer',
+                    npkRequirements: 'N: High, P: Medium, K: Medium'
+                });
+            }
+            
+            // Wheat prefers moderate rainfall, cooler temperatures, and neutral pH
+            if (rainfall > 500 && rainfall < 1200 && temperature > 15 && temperature < 25 && ph >= 6.0 && ph <= 7.5) {
+                recommendedCrops.push({
+                    name: 'Wheat',
+                    type: 'Cereal',
+                    suitability: 90,
+                    waterNeeds: 'Medium',
+                    growingSeason: 'Winter',
+                    npkRequirements: 'N: Medium, P: Medium, K: Low'
+                });
+            }
+            
+            // Corn prefers moderate rainfall, warm temperatures, and slightly acidic to neutral pH
+            if (rainfall > 600 && rainfall < 1200 && temperature > 20 && temperature < 30 && ph >= 5.5 && ph <= 7.0) {
+                recommendedCrops.push({
+                    name: 'Corn',
+                    type: 'Cereal',
+                    suitability: 85,
+                    waterNeeds: 'Medium',
+                    growingSeason: 'Summer',
+                    npkRequirements: 'N: High, P: Medium, K: Medium'
+                });
+            }
+            
+            // Potatoes prefer moderate rainfall, cooler temperatures, and acidic pH
+            if (rainfall > 500 && rainfall < 1000 && temperature > 15 && temperature < 25 && ph >= 4.8 && ph <= 6.5) {
+                recommendedCrops.push({
+                    name: 'Potato',
+                    type: 'Tuber',
+                    suitability: 80,
+                    waterNeeds: 'Medium',
+                    growingSeason: 'Spring-Summer',
+                    npkRequirements: 'N: Medium, P: High, K: High'
+                });
+            }
+            
+            // Tomatoes prefer moderate rainfall, warm temperatures, and slightly acidic to neutral pH
+            if (rainfall > 400 && rainfall < 800 && temperature > 20 && temperature < 30 && ph >= 5.5 && ph <= 7.0) {
+                recommendedCrops.push({
+                    name: 'Tomato',
+                    type: 'Vegetable',
+                    suitability: 75,
+                    waterNeeds: 'Medium',
+                    growingSeason: 'Summer',
+                    npkRequirements: 'N: Medium, P: High, K: High'
+                });
+            }
+            
+            // Cotton prefers moderate rainfall, warm temperatures, and neutral pH
+            if (rainfall > 700 && rainfall < 1300 && temperature > 20 && temperature < 35 && ph >= 5.8 && ph <= 8.0) {
+                recommendedCrops.push({
+                    name: 'Cotton',
+                    type: 'Fiber',
+                    suitability: 70,
+                    waterNeeds: 'Medium',
+                    growingSeason: 'Summer',
+                    npkRequirements: 'N: High, P: Medium, K: Medium'
+                });
+            }
+            
+            // If no crops match the criteria, provide some default recommendations
+            if (recommendedCrops.length === 0) {
+                recommendedCrops = [
+                    {
+                        name: 'Sorghum',
+                        type: 'Cereal',
+                        suitability: 65,
+                        waterNeeds: 'Low',
+                        growingSeason: 'Summer',
+                        npkRequirements: 'N: Medium, P: Low, K: Low'
+                    },
+                    {
+                        name: 'Millet',
+                        type: 'Cereal',
+                        suitability: 60,
+                        waterNeeds: 'Low',
+                        growingSeason: 'Summer',
+                        npkRequirements: 'N: Low, P: Low, K: Low'
+                    },
+                    {
+                        name: 'Cover Crops',
+                        type: 'Soil Improvement',
+                        suitability: 70,
+                        waterNeeds: 'Low',
+                        growingSeason: 'Any',
+                        npkRequirements: 'N: Low, P: Low, K: Low'
+                    }
+                ];
+            }
+            
+            // Create crop cards
+            recommendedCrops.forEach(crop => {
+                const cropCard = createCropCard(crop, temperature, humidity, rainfall, nitrogen, phosphorous, potassium, ph);
+                if (cropCardsContainer) {
+                    cropCardsContainer.appendChild(cropCard);
+                }
+            });
+            
+            // Show recommendations section
+            if (cropRecommendations) {
+                cropRecommendations.style.display = 'block';
+                
+                // Scroll to recommendations
+                cropRecommendations.scrollIntoView({ behavior: 'smooth' });
+            }
+        }, 1500);
     }
 
     // Create a crop card element
-    function createCropCard(cropName, soilType, soilPH, rainfall, temperature, region) {
+    function createCropCard(crop, temperature, humidity, rainfall, nitrogen, phosphorous, potassium, ph) {
         const card = document.createElement('div');
         card.className = 'crop-card';
         
-        // Generate a random suitability score between 70 and 95
-        const suitabilityScore = Math.floor(Math.random() * 26) + 70;
-        
         // Determine suitability class
         let suitabilityClass = '';
-        if (suitabilityScore >= 90) {
+        if (crop.suitability >= 90) {
             suitabilityClass = 'excellent';
-        } else if (suitabilityScore >= 80) {
+        } else if (crop.suitability >= 80) {
             suitabilityClass = 'good';
-        } else {
+        } else if (crop.suitability >= 70) {
             suitabilityClass = 'fair';
+        } else {
+            suitabilityClass = 'poor';
         }
         
         // Create card content
         card.innerHTML = `
             <div class="crop-card-header">
-                <h3>${cropName}</h3>
-                <span class="suitability ${suitabilityClass}">${suitabilityScore}% Match</span>
+                <h3>${crop.name}</h3>
+                <span class="suitability ${suitabilityClass}">${crop.suitability}% Match</span>
             </div>
             <div class="crop-card-image">
-                <img src="images/crops/${cropName.toLowerCase().replace(/\s+/g, '-')}.jpg" 
-                     alt="${cropName}" 
+                <img src="images/crops/${crop.name.toLowerCase().replace(/\s+/g, '-')}.jpg" 
+                     alt="${crop.name}" 
                      onerror="this.src='images/crops/placeholder.jpg'">
             </div>
             <div class="crop-card-details">
                 <div class="detail-item">
-                    <span class="detail-label">Soil Type:</span>
-                    <span class="detail-value">${soilType.charAt(0).toUpperCase() + soilType.slice(1)}</span>
-                </div>
-                <div class="detail-item">
-                    <span class="detail-label">Soil pH:</span>
-                    <span class="detail-value">${soilPH.charAt(0).toUpperCase() + soilPH.slice(1)}</span>
+                    <span class="detail-label">Type:</span>
+                    <span class="detail-value">${crop.type}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Water Needs:</span>
-                    <span class="detail-value">${getWaterNeeds(cropName)}</span>
+                    <span class="detail-value">${crop.waterNeeds}</span>
                 </div>
                 <div class="detail-item">
                     <span class="detail-label">Growing Season:</span>
-                    <span class="detail-value">${getGrowingSeason(cropName, region)}</span>
+                    <span class="detail-value">${crop.growingSeason}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">NPK Requirements:</span>
+                    <span class="detail-value">${crop.npkRequirements}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Optimal pH:</span>
+                    <span class="detail-value">${getOptimalPH(crop.name)}</span>
+                </div>
+                <div class="detail-item">
+                    <span class="detail-label">Temperature Range:</span>
+                    <span class="detail-value">${getTemperatureRange(crop.name)}</span>
                 </div>
             </div>
             <div class="crop-card-footer">
@@ -168,44 +255,37 @@ document.addEventListener('DOMContentLoaded', function() {
         return card;
     }
 
-    // Helper function to get water needs (simplified)
-    function getWaterNeeds(cropName) {
-        const lowWaterCrops = ['Olives', 'Figs', 'Asparagus', 'Cassava'];
-        const highWaterCrops = ['Rice', 'Sugarcane', 'Bananas', 'Lettuce', 'Spinach'];
+    // Helper function to get optimal pH range for a crop
+    function getOptimalPH(cropName) {
+        const phRanges = {
+            'Rice': '5.5 - 7.0',
+            'Wheat': '6.0 - 7.5',
+            'Corn': '5.5 - 7.0',
+            'Potato': '4.8 - 6.5',
+            'Tomato': '5.5 - 7.0',
+            'Cotton': '5.8 - 8.0',
+            'Sorghum': '5.5 - 7.5',
+            'Millet': '5.5 - 7.0',
+            'Cover Crops': '5.0 - 7.5'
+        };
         
-        if (lowWaterCrops.includes(cropName)) {
-            return 'Low';
-        } else if (highWaterCrops.includes(cropName)) {
-            return 'High';
-        } else {
-            return 'Medium';
-        }
+        return phRanges[cropName] || '6.0 - 7.0';
     }
 
-    // Helper function to get growing season (simplified)
-    function getGrowingSeason(cropName, region) {
-        const springCrops = ['Lettuce', 'Spinach', 'Peas', 'Radishes'];
-        const summerCrops = ['Tomatoes', 'Peppers', 'Corn', 'Cucumbers'];
-        const fallCrops = ['Broccoli', 'Cauliflower', 'Cabbage', 'Kale'];
-        const winterCrops = ['Cover Crops', 'Garlic', 'Winter Wheat'];
+    // Helper function to get temperature range for a crop
+    function getTemperatureRange(cropName) {
+        const tempRanges = {
+            'Rice': '20°C - 35°C',
+            'Wheat': '15°C - 25°C',
+            'Corn': '20°C - 30°C',
+            'Potato': '15°C - 25°C',
+            'Tomato': '20°C - 30°C',
+            'Cotton': '20°C - 35°C',
+            'Sorghum': '25°C - 35°C',
+            'Millet': '25°C - 35°C',
+            'Cover Crops': '10°C - 30°C'
+        };
         
-        if (springCrops.includes(cropName)) {
-            return 'Spring';
-        } else if (summerCrops.includes(cropName)) {
-            return 'Summer';
-        } else if (fallCrops.includes(cropName)) {
-            return 'Fall';
-        } else if (winterCrops.includes(cropName)) {
-            return 'Winter';
-        } else {
-            // Determine based on climate region (simplified)
-            if (region === 'tropical' || region === 'subtropical') {
-                return 'Year-round';
-            } else if (region === 'temperate' || region === 'continental') {
-                return 'Spring-Summer';
-            } else {
-                return 'Summer';
-            }
-        }
+        return tempRanges[cropName] || '15°C - 30°C';
     }
 });

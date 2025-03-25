@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AgriTech - IoT Dashboard</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <header>
+        <div class="container">
+            <div class="logo">
+                <a href="index.html">AgriTech</a>
+            </div>
+            <nav>
+                <ul class="nav-links">
+                    <li><a href="index.html">HOME</a></li>
+                    <li><a href="disease-detect.html">DISEASE DETECT</a></li>
+                    <li><a href="crop-preferences.html">CROP PREF.</a></li>
+                    <li><a href="weather.html">WEATHER</a></li>
+                    <li><a href="fertilizer-recommendation.html">FERTILIZER</a></li>
+                    <li><a href="iot-dashboard.html" class="active">IOT DASHBOARD</a></li>
+                    <li><a href="contact.html">CONTACT US</a></li>
+                    <li><a href="account.html" class="account-link"><i class="fas fa-user-circle"></i></a></li>
+                </ul>
+                <div class="hamburger">
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                    <span class="bar"></span>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <section class="page-header">
+        <div class="container">
+            <h1>IoT Dashboard</h1>
+            <p>Monitor your farm's real-time sensor data</p>
+        </div>
+    </section>
+
+    <section class="iot-dashboard">
+        <div class="container">
+            <div class="dashboard-header">
+                <div class="dashboard-title">
+                    <h2>Farm Monitoring System</h2>
+                    <p>Last updated: <span id="lastUpdated">Loading...</span></p>
+                </div>
+                <div class="dashboard-actions">
+                    <select id="locationSelector">
+                        <option value="farm1">Farm 1 - Main Field</option>
+                        <option value="farm2">Farm 2 - Greenhouse</option>
+                        <option value="farm3">Farm 3 - Orchard</option>
+                    </select>
+                    <button id="refreshData" class="btn-small">
+                        <i class="fas fa-sync-alt"></i> Refresh
+                    </button>
+                </div>
+            </div>
+            
+            <div class="dashboard-status">
+                <div class="status-card online">
+                    <i class="fas fa-wifi"></i>
+                    <span>System Online</span>
+                </div>
+                <div class="status-card battery">
+                    <i class="fas fa-battery-three-quarters"></i>
+                    <span>Battery: 78%</span>
+                </div>
+                <div class="status-card signal">
+                    <i class="fas fa-signal"></i>
+                    <span>Signal: Strong</span>
+                </div>
+                <div class="status-card devices">
+                    <i class="fas fa-microchip"></i>
+                    <span>8 Devices Active</span>
+                </div>
+            </div>
+            
+            <div class="sensor-readings">
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-thermometer-half"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Temperature</h3>
+                        <div class="reading" id="temperatureReading">24.5°C</div>
+                        <div class="reading-range">Min: 18.2°C | Max: 28.7°C</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-tint"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Humidity</h3>
+                        <div class="reading" id="humidityReading">65%</div>
+                        <div class="reading-range">Min: 45% | Max: 80%</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-water"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Soil Moisture</h3>
+                        <div class="reading" id="moistureReading">38%</div>
+                        <div class="reading-range">Min: 20% | Max: 60%</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-sun"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Light Intensity</h3>
+                        <div class="reading" id="lightReading">856 lux</div>
+                        <div class="reading-range">Min: 0 lux | Max: 2000 lux</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-wind"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Wind Speed</h3>
+                        <div class="reading" id="windReading">12 km/h</div>
+                        <div class="reading-range">Min: 0 km/h | Max: 35 km/h</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-cloud-rain"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Rainfall</h3>
+                        <div class="reading" id="rainfallReading">0.5 mm</div>
+                        <div class="reading-range">Daily: 0.5 mm | Weekly: 12 mm</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-flask"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>Soil pH</h3>
+                        <div class="reading" id="phReading">6.8</div>
+                        <div class="reading-range">Min: 5.5 | Max: 7.5</div>
+                    </div>
+                </div>
+                
+                <div class="sensor-card">
+                    <div class="sensor-icon">
+                        <i class="fas fa-leaf"></i>
+                    </div>
+                    <div class="sensor-data">
+                        <h3>NPK Levels</h3>
+                        <div class="reading" id="npkReading">N: 45 | P: 32 | K: 28</div>
+                        <div class="reading-range">  id="npkReading">N: 45 | P: 32 | K: 28</div>
+                        <div class="reading-range">Optimal: N: 40-60 | P: 20-40 | K: 20-40</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="data-visualization">
+                <div class="chart-container">
+                    <h3>Temperature & Humidity (24h)</h3>
+                    <canvas id="tempHumidityChart"></canvas>
+                </div>
+                
+                <div class="chart-container">
+                    <h3>Soil Moisture (7 Days)</h3>
+                    <canvas id="soilMoistureChart"></canvas>
+                </div>
+            </div>
+            
+            <div class="device-control">
+                <h2>Device Control</h2>
+                <div class="control-cards">
+                    <div class="control-card">
+                        <div class="control-header">
+                            <h3>Irrigation System</h3>
+                            <div class="control-status on">ON</div>
+                        </div>
+                        <div class="control-body">
+                            <p>Last activated: Today, 06:30 AM</p>
+                            <p>Next scheduled: Today, 06:30 PM</p>
+                            <div class="control-actions">
+                                <button class="btn-small">Turn Off</button>
+                                <button class="btn-small">Schedule</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-card">
+                        <div class="control-header">
+                            <h3>Greenhouse Fans</h3>
+                            <div class="control-status off">OFF</div>
+                        </div>
+                        <div class="control-body">
+                            <p>Last activated: Yesterday, 02:15 PM</p>
+                            <p>Mode: Automatic (Temp > 30°C)</p>
+                            <div class="control-actions">
+                                <button class="btn-small">Turn On</button>
+                                <button class="btn-small">Settings</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-card">
+                        <div class="control-header">
+                            <h3>Soil Sensors</h3>
+                            <div class="control-status on">ON</div>
+                        </div>
+                        <div class="control-body">
+                            <p>Battery: 78% | Signal: Strong</p>
+                            <p>Reading interval: Every 30 min</p>
+                            <div class="control-actions">
+                                <button class="btn-small">Configure</button>
+                                <button class="btn-small">Calibrate</button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="control-card">
+                        <div class="control-header">
+                            <h3>Weather Station</h3>
+                            <div class="control-status on">ON</div>
+                        </div>
+                        <div class="control-body">
+                            <p>Battery: 92% | Signal: Strong</p>
+                            <p>Reading interval: Every 15 min</p>
+                            <div class="control-actions">
+                                <button class="btn-small">Configure</button>
+                                <button class="btn-small">View Data</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="alerts-section">
+                <h2>Recent Alerts</h2>
+                <div class="alerts-container">
+                    <div class="alert warning">
+                        <div class="alert-icon">
+                            <i class="fas fa-exclamation-triangle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Low Soil Moisture</h4>
+                            <p>Sector B3 soil moisture below 25%. Consider irrigation.</p>
+                            <span class="alert-time">Today, 11:23 AM</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-small">Resolve</button>
+                        </div>
+                    </div>
+                    
+                    <div class="alert info">
+                        <div class="alert-icon">
+                            <i class="fas fa-info-circle"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>Irrigation Completed</h4>
+                            <p>Scheduled irrigation for Sector A1 completed successfully.</p>
+                            <span class="alert-time">Today, 06:45 AM</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-small">Dismiss</button>
+                        </div>
+                    </div>
+                    
+                    <div class="alert danger">
+                        <div class="alert-icon">
+                            <i class="fas fa-radiation"></i>
+                        </div>
+                        <div class="alert-content">
+                            <h4>High Temperature</h4>
+                            <p>Greenhouse temperature reached 32°C. Fans activated automatically.</p>
+                            <span class="alert-time">Yesterday, 02:15 PM</span>
+                        </div>
+                        <div class="alert-actions">
+                            <button class="btn-small">Dismiss</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    <a href="index.html">AgriTech</a>
+                    <p>Modern Solutions for Modern Farming</p>
+                </div>
+                <div class="footer-links">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="index.html">Home</a></li>
+                        <li><a href="disease-detect.html">Disease Detection</a></li>
+                        <li><a href="crop-preferences.html">Crop Preferences</a></li>
+                        <li><a href="weather.html">Weather</a></li>
+                        <li><a href="fertilizer-recommendation.html">Fertilizer</a></li>
+                        <li><a href="iot-dashboard.html">IoT Dashboard</a></li>
+                        <li><a href="contact.html">Contact Us</a></li>
+                    </ul>
+                </div>
+                <div class="footer-contact">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Farm Road, Agriville, AG 12345</p>
+                    <p><i class="fas fa-phone"></i> (123) 456-7890</p>
+                    <p><i class="fas fa-envelope"></i> info@agritech.com</p>
+                </div>
+                <div class="footer-social">
+                    <h3>Follow Us</h3>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2023 AgriTech. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script src="js/script.js"></script>
+    <script src="js/iot-dashboard.js"></script>
+</body>
+</html>
