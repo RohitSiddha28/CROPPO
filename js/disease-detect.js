@@ -117,7 +117,8 @@ document.addEventListener('DOMContentLoaded', function() {
             analyzeBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
             analyzeBtn.disabled = true;
 
-            // Simulate API call with timeout
+            // Simulated API call block (replace with your actual API call)
+            /*
             setTimeout(function() {
                 // Reset button state
                 analyzeBtn.innerHTML = 'Analyze Image';
@@ -129,6 +130,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Scroll to results
                 resultsContainer.scrollIntoView({ behavior: 'smooth' });
             }, 2000);
+            */
+
+            // TODO: Replace the above simulation with your actual API call logic.
         });
     }
 });

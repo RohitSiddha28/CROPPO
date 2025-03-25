@@ -31,8 +31,9 @@ document.addEventListener('DOMContentLoaded', function() {
         refreshDataBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i>';
         refreshDataBtn.disabled = true;
         
-        // In a real app, you would fetch data from an API
-        // For this demo, we'll simulate a response with setTimeout
+        // In a real app, fetch data from an API here.
+        // For now, the simulation using random data is commented out.
+        /*
         setTimeout(function() {
             // Reset button state
             refreshDataBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Refresh';
@@ -45,12 +46,17 @@ document.addEventListener('DOMContentLoaded', function() {
             // Update sensor readings with random values
             updateSensorReadings();
             
-            // Update charts
+            // Update charts with new data
             updateCharts();
         }, 1000);
+        */
+        
+        // TODO: Replace the above simulation with your actual API call and data processing logic.
     }
     
     // Update sensor readings with random values
+    // Commented out because this simulation uses random data.
+    /*
     function updateSensorReadings() {
         // Temperature (20-35°C)
         const tempReading = document.getElementById('temperatureReading');
@@ -110,6 +116,7 @@ document.addEventListener('DOMContentLoaded', function() {
             npkReading.textContent = `N: ${n} | P: ${p} | K: ${k}`;
         }
     }
+    */
     
     // Initialize charts
     function initCharts() {
@@ -211,6 +218,8 @@ document.addEventListener('DOMContentLoaded', function() {
     }
     
     // Update charts with new random data
+    // Commented out because this simulation uses random data.
+    /*
     function updateCharts() {
         if (window.tempHumidityChart) {
             // Generate new random temperature data (20-35°C)
@@ -243,4 +252,5 @@ document.addEventListener('DOMContentLoaded', function() {
             window.soilMoistureChart.update();
         }
     }
+    */
 });

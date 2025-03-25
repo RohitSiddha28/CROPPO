@@ -55,8 +55,8 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
         submitBtn.disabled = true;
         
-        // In a real app, you would make an API call to a backend service
-        // For this demo, we'll simulate a response with setTimeout
+        // In a real app, replace the simulation below with an API call or your own logic.
+        /*
         setTimeout(function() {
             // Reset button state
             submitBtn.innerHTML = 'Get Recommendations';
@@ -69,9 +69,6 @@ document.addEventListener('DOMContentLoaded', function() {
             
             // Determine crop recommendations based on input (simplified logic)
             let recommendedCrops = [];
-            
-            // Very simplified recommendation logic based on input parameters
-            // In a real app, this would be much more sophisticated
             
             // Rice prefers high rainfall, warm temperatures, and slightly acidic to neutral pH
             if (rainfall > 1000 && temperature > 20 && temperature < 35 && ph >= 5.5 && ph <= 7.0) {
@@ -191,6 +188,27 @@ document.addEventListener('DOMContentLoaded', function() {
                 cropRecommendations.scrollIntoView({ behavior: 'smooth' });
             }
         }, 1500);
+        */
+       
+        // TODO: Replace the above simulated response with your actual API call or logic.
+        // Example:
+        // fetch('https://your-api-endpoint.com/analyze', {
+        //     method: 'POST',
+        //     headers: { 'Content-Type': 'application/json' },
+        //     body: JSON.stringify({ temperature, humidity, rainfall, nitrogen, phosphorous, potassium, ph })
+        // })
+        // .then(response => response.json())
+        // .then(data => {
+        //     // Process the response data and update the UI accordingly
+        // })
+        // .catch(error => {
+        //     console.error('Error:', error);
+        //     // Handle error state and update the UI
+        // })
+        // .finally(() => {
+        //     submitBtn.innerHTML = 'Get Recommendations';
+        //     submitBtn.disabled = false;
+        // });
     }
 
     // Create a crop card element

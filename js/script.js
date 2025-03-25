@@ -50,7 +50,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 dot.classList.add('active');
                 
                 // Show corresponding testimonial (implementation would depend on slider structure)
-                // This is a simplified example
                 const testimonials = document.querySelectorAll('.testimonial');
                 testimonials.forEach((testimonial, i) => {
                     if (i === index) {

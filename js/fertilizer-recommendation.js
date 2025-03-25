@@ -57,8 +57,9 @@ document.addEventListener('DOMContentLoaded', function() {
         submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Analyzing...';
         submitBtn.disabled = true;
         
-        // In a real app, you would make an API call to a backend service
-        // For this demo, we'll simulate a response with setTimeout
+        // In a real app, you would make an API call to a backend service.
+        // For this demo, we'll simulate a response with setTimeout.
+        /*
         setTimeout(function() {
             // Reset button state
             submitBtn.innerHTML = 'Get Fertilizer Recommendation';
@@ -73,7 +74,6 @@ document.addEventListener('DOMContentLoaded', function() {
             let kValue = 0;
             
             // Very simplified recommendation logic based on crop type and NPK values
-            // In a real app, this would be much more sophisticated
             if (cropType === 'rice') {
                 if (nitrogen < 80) {
                     recommendedFertilizer = 'Urea (46-0-0)';
@@ -194,5 +194,8 @@ document.addEventListener('DOMContentLoaded', function() {
             // Scroll to results
             fertilizerResults.scrollIntoView({ behavior: 'smooth' });
         }, 1500);
+        */
+        
+        // TODO: Replace the above simulated response with your actual API call or processing logic.
     }
 });

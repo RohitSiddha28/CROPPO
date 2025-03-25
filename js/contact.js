@@ -32,8 +32,9 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Sending...';
             submitBtn.disabled = true;
             
-            // In a real app, you would send this data to a server
-            // For this demo, we'll simulate a response with setTimeout
+            // In a real app, send this data to your server for processing.
+            // The simulated response code below is commented out for production use:
+            /*
             setTimeout(function() {
                 // Reset button state
                 submitBtn.innerHTML = 'Send Message';
@@ -45,6 +46,9 @@ document.addEventListener('DOMContentLoaded', function() {
                 // Reset form
                 contactForm.reset();
             }, 2000);
+            */
+            
+            // TODO: Replace the above simulated response with your actual server request logic.
         });
     }
 

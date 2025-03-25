@@ -107,19 +107,19 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Logging in...';
             submitBtn.disabled = true;
             
-            // In a real app, you would send this data to a server for authentication
-            // For this demo, we'll simulate a response with setTimeout
-            setTimeout(function() {
-                // Reset button state
-                submitBtn.innerHTML = 'Login';
-                submitBtn.disabled = false;
-                
-                // Simulate successful login
-                alert('Login successful! Redirecting to dashboard...');
-                
-                // In a real app, you would redirect to the dashboard or home page
-                window.location.href = 'index.html';
-            }, 1500);
+            // In a real app, send the data to your server for authentication
+            // The demo code below is commented out for production use:
+            // setTimeout(function() {
+            //     // Reset button state
+            //     submitBtn.innerHTML = 'Login';
+            //     submitBtn.disabled = false;
+            //     
+            //     // Simulate successful login
+            //     alert('Login successful! Redirecting to dashboard...');
+            //     
+            //     // Redirect to the dashboard or home page
+            //     window.location.href = 'index.html';
+            // }, 1500);
         });
     }
     
@@ -163,22 +163,22 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> Creating account...';
             submitBtn.disabled = true;
             
-            // In a real app, you would send this data to a server for account creation
-            // For this demo, we'll simulate a response with setTimeout
-            setTimeout(function() {
-                // Reset button state
-                submitBtn.innerHTML = 'Create Account';
-                submitBtn.disabled = false;
-                
-                // Simulate successful account creation
-                alert('Account created successfully! You can now log in.');
-                
-                // Switch to login tab
-                document.querySelector('[data-tab="login"]').click();
-                
-                // Reset form
-                signupForm.reset();
-            }, 1500);
+            // In a real app, send the data to your server for account creation
+            // The demo code below is commented out for production use:
+            // setTimeout(function() {
+            //     // Reset button state
+            //     submitBtn.innerHTML = 'Create Account';
+            //     submitBtn.disabled = false;
+            //     
+            //     // Simulate successful account creation
+            //     alert('Account created successfully! You can now log in.');
+            //     
+            //     // Switch to login tab
+            //     document.querySelector('[data-tab="login"]').click();
+            //     
+            //     // Reset form
+            //     signupForm.reset();
+            // }, 1500);
         });
     }
     

@@ -65,7 +65,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 
-    // Fetch weather data (simulated)
+    // Fetch weather data
     function fetchWeatherData(location, days) {
         // Show loading state
         if (weatherSearchForm) {
@@ -74,8 +74,9 @@ document.addEventListener('DOMContentLoaded', function() {
             submitBtn.disabled = true;
         }
         
-        // In a real app, you would make an API call to a weather service
-        // For this demo, we'll simulate a response with setTimeout
+        // In a real app, make an API call to a weather service here.
+        // The simulated response using random data is commented out below.
+        /*
         setTimeout(function() {
             // Reset button state
             if (weatherSearchForm) {
@@ -84,26 +85,28 @@ document.addEventListener('DOMContentLoaded', function() {
                 submitBtn.disabled = false;
             }
             
-            // Display weather data
+            // Display weather data using simulated random values
             displayWeatherData(location, days);
             
             // Show weather display section
             if (weatherDisplay) {
                 weatherDisplay.style.display = 'block';
-                
-                // Scroll to weather display
                 weatherDisplay.scrollIntoView({ behavior: 'smooth' });
             }
         }, 1500);
+        */
+        
+        // TODO: Replace the above simulation with your actual API call and data processing logic.
     }
 
-    // Display weather data (simulated)
+    // Display weather data
     function displayWeatherData(location, days) {
         // Update location and date
         document.getElementById('weatherLocation').textContent = formatLocation(location);
         document.getElementById('currentDate').textContent = getCurrentDate();
         
-        // Generate random weather data
+        /* 
+        // Simulated random weather data (replace with API data)
         const currentTemp = Math.floor(Math.random() * 25) + 10; // 10-35°C
         const weatherConditions = ['clear', 'partly cloudy', 'cloudy', 'rain', 'thunderstorm'];
         const randomCondition = weatherConditions[Math.floor(Math.random() * weatherConditions.length)];
@@ -122,11 +125,14 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('precipitation').textContent = randomCondition.includes('rain') || randomCondition.includes('thunder') ? 
             `${Math.floor(Math.random() * 80) + 20}%` : '0%';
         
-        // Generate forecast
+        // Generate forecast using simulated data
         generateForecast(days, currentTemp, randomCondition);
         
-        // Update agricultural impact based on weather
+        // Update agricultural impact based on simulated weather data
         updateAgriculturalImpact(randomCondition, currentTemp);
+        */
+        
+        // TODO: Replace the above simulation with actual weather data from your API.
     }
 
     // Generate forecast data
@@ -137,25 +143,21 @@ document.addEventListener('DOMContentLoaded', function() {
         // Clear previous forecast
         forecastContainer.innerHTML = '';
         
-        // Weather conditions to cycle through
+        /* 
+        // Simulated forecast generation using random data
         const conditions = ['clear', 'partly cloudy', 'cloudy', 'rain', 'clear', 'partly cloudy'];
         
-        // Generate forecast for each day
         for (let i = 0; i < days; i++) {
-            // Get date
             const date = new Date();
             date.setDate(date.getDate() + i);
             
-            // Generate weather data with some variation
-            const tempVariation = Math.floor(Math.random() * 10) - 5; // -5 to +5
+            const tempVariation = Math.floor(Math.random() * 10) - 5; // -5 to +5 variation
             const dayTemp = baseTemp + tempVariation;
-            const nightTemp = dayTemp - Math.floor(Math.random() * 8) - 3; // 3-10 degrees cooler at night
+            const nightTemp = dayTemp - Math.floor(Math.random() * 8) - 3;
             
-            // Cycle through conditions with some randomness
             const conditionIndex = (i + Math.floor(Math.random() * 2)) % conditions.length;
             const dayCondition = conditions[conditionIndex];
             
-            // Create forecast card
             const forecastCard = document.createElement('div');
             forecastCard.className = 'forecast-card';
             
@@ -170,34 +172,38 @@ document.addEventListener('DOMContentLoaded', function() {
             
             forecastContainer.appendChild(forecastCard);
         }
+        */
+        
+        // TODO: Replace the above simulated forecast generation with your actual forecast data.
     }
 
     // Update agricultural impact based on weather
     function updateAgriculturalImpact(condition, temperature) {
+        /* 
+        // Simulated agricultural impact calculations based on random weather data
+        
         // Irrigation needs
         const irrigationMeter = document.querySelector('.impact-card:nth-child(1) .meter-fill');
         const irrigationValue = document.querySelector('.impact-card:nth-child(1) .meter-value');
         const irrigationText = document.querySelector('.impact-card:nth-child(1) p');
         
-        let irrigationLevel = 50; // Default medium
-        
+        let irrigationLevel = 50;
         if (condition.includes('rain') || condition.includes('thunder')) {
-            irrigationLevel = 20; // Low need
+            irrigationLevel = 20;
             irrigationValue.textContent = 'Low';
             irrigationText.textContent = 'Recent precipitation reduces irrigation needs for the next 2-3 days.';
         } else if (condition === 'clear' && temperature > 25) {
-            irrigationLevel = 80; // High need
+            irrigationLevel = 80;
             irrigationValue.textContent = 'High';
             irrigationText.textContent = 'Hot and dry conditions require immediate irrigation for most crops.';
         } else if (condition === 'partly cloudy' && temperature > 20) {
-            irrigationLevel = 60; // Medium-high need
+            irrigationLevel = 60;
             irrigationValue.textContent = 'Medium-High';
             irrigationText.textContent = 'Moderate irrigation recommended within the next 1-2 days.';
         } else {
             irrigationValue.textContent = 'Medium';
             irrigationText.textContent = 'Normal irrigation schedule recommended.';
         }
-        
         if (irrigationMeter) {
             irrigationMeter.style.width = `${irrigationLevel}%`;
         }
@@ -207,25 +213,23 @@ document.addEventListener('DOMContentLoaded', function() {
         const diseaseValue = document.querySelector('.impact-card:nth-child(2) .meter-value');
         const diseaseText = document.querySelector('.impact-card:nth-child(2) p');
         
-        let diseaseLevel = 30; // Default low
-        
+        let diseaseLevel = 30;
         if ((condition.includes('rain') || condition === 'cloudy') && temperature > 20) {
-            diseaseLevel = 70; // High risk
+            diseaseLevel = 70;
             diseaseValue.textContent = 'High';
             diseaseText.textContent = 'Warm and humid conditions increase risk for fungal diseases. Monitor crops closely.';
         } else if (condition.includes('rain') && temperature < 20) {
-            diseaseLevel = 50; // Medium risk
+            diseaseLevel = 50;
             diseaseValue.textContent = 'Medium';
             diseaseText.textContent = 'Cool and wet conditions may promote certain diseases. Preventative measures recommended.';
         } else if (condition === 'clear' && temperature > 30) {
-            diseaseLevel = 40; // Medium-low risk
+            diseaseLevel = 40;
             diseaseValue.textContent = 'Medium-Low';
             diseaseText.textContent = 'Hot and dry conditions may stress plants, monitor for pest infestations.';
         } else {
             diseaseValue.textContent = 'Low';
             diseaseText.textContent = 'Current conditions indicate low risk for common crop diseases.';
         }
-        
         if (diseaseMeter) {
             diseaseMeter.style.width = `${diseaseLevel}%`;
         }
@@ -235,38 +239,36 @@ document.addEventListener('DOMContentLoaded', function() {
         const harvestValue = document.querySelector('.impact-card:nth-child(3) .meter-value');
         const harvestText = document.querySelector('.impact-card:nth-child(3) p');
         
-        let harvestLevel = 50; // Default medium
-        
+        let harvestLevel = 50;
         if (condition === 'clear' && temperature > 15 && temperature < 30) {
-            harvestLevel = 90; // Excellent
+            harvestLevel = 90;
             harvestValue.textContent = 'Excellent';
             harvestText.textContent = 'Ideal conditions for harvesting most crops. Plan harvest activities in the next 2-3 days.';
         } else if (condition === 'partly cloudy' && temperature > 15 && temperature < 28) {
-            harvestLevel = 80; // Very good
+            harvestLevel = 80;
             harvestValue.textContent = 'Very Good';
             harvestText.textContent = 'Good conditions for harvesting. Consider scheduling harvest soon.';
         } else if (condition.includes('rain') || condition.includes('thunder')) {
-            harvestLevel = 20; // Poor
+            harvestLevel = 20;
             harvestValue.textContent = 'Poor';
             harvestText.textContent = 'Wet conditions not suitable for harvesting. Delay harvest until drier conditions.';
         } else {
             harvestValue.textContent = 'Fair';
             harvestText.textContent = 'Moderate conditions for harvesting. Use judgment based on crop type and maturity.';
         }
-        
         if (harvestMeter) {
             harvestMeter.style.width = `${harvestLevel}%`;
         }
+        */
+        
+        // TODO: Replace the above simulated agricultural impact calculations with real data logic.
     }
 
     // Helper function to format location
     function formatLocation(location) {
-        // If location contains coordinates, format them nicely
         if (location.includes(',')) {
             return 'Current Location';
         }
-        
-        // Otherwise just return the location with proper capitalization
         return location.split(',').map(part => capitalizeFirstLetter(part.trim())).join(', ');
     }
 
